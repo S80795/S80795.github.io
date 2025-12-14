@@ -12,7 +12,7 @@
             --color-card-bg: #FFFFFF;
             --color-text-primary: #1C2B3A;
             --color-text-secondary: #5E7A8E;
-            --color-accent: #004D99; /* Deep Ocean Blue (Updated Theme) */
+            --color-accent: #004D99; /* Deep Ocean Blue (UMT Theme) */
             --border-radius: 12px;
             --padding-base: 1.5rem;
         }
@@ -55,14 +55,16 @@
             border-radius: var(--border-radius);
             padding: var(--padding-base);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            /* Added transform for the hover effect */
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
+        /* Subtle Hover Effect */
         .bento-card:hover {
-            transform: translateY(-2px);
+            transform: scale(1.01); /* Subtle zoom effect */
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
 
@@ -88,24 +90,42 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Card 1: Profile */
-        .card-profile .profile-details {
-            margin-top: 1rem;
+        /* === UPDATED: Card 1: Profile with Background Image and Legibility === */
+        .card-profile {
+            /* Background Image Setup */
+            background-image: url('bg.jpg'); /* This points to your image file */
+            background-size: cover;          /* Scales the image to cover the entire card */
+            background-position: center;     /* Centers the image */
+            background-repeat: no-repeat;
+            background-color: #1C2B3A;       /* Fallback/Dark Base */
+            
+            /* Text Legibility Adjustments for dark background */
+            color: white; 
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Shadow for text pop */
         }
+        
+        /* Ensure all text elements inside the card are light-colored */
+        .card-profile .card-title {
+            color: #B4D7FF; /* Light Accent Color */
+        }
+
+        .card-profile .card-content h2,
+        .card-profile .card-content p,
         .card-profile .profile-details p {
-            margin-bottom: 0.2rem;
-            font-weight: 600;
+            color: white;
         }
+        
         .card-profile .social-links a {
-            color: var(--color-accent);
+            color: #DDEEFF; /* Very light blue for links */
             text-decoration: none;
             font-weight: 600;
             margin-right: 1rem;
             font-size: 0.9rem;
+            display: inline-block;
+            padding: 0.2rem 0;
         }
-        .card-profile .social-links {
-            margin-top: 1rem;
-        }
+        /* === END UPDATED PROFILE CSS === */
+
 
         /* Card 2: Location/Time */
         .card-location .location-info {
@@ -140,7 +160,6 @@
         .card-playlist {
             grid-column: 1 / -1;
             padding: 1rem 1.5rem;
-            /* Update gradient to match new accent color */
             background: linear-gradient(135deg, #1C2B3A, var(--color-accent)); 
             color: #FFFFFF;
         }
@@ -189,15 +208,19 @@
 
             /* Card 4 (Case Study): Medium box (2x1) */
             .card-case-study {
-                /* Shifts below Card 2 and 3 on desktop */
                 grid-column: 3 / span 2; 
                 grid-row: span 1;
             }
 
-            /* Card 5 (Hobby): Small box (1x1) */
+            /* Card 5 (Hobby): Small box (1x1) - Shifts right to make space */
             .card-hobby {
-                /* Placed next to Card 4 on desktop */
                 grid-column: 3 / span 1; 
+                grid-row: 2 / span 1;
+            }
+            
+            /* Card 7 (Reflection): New Card (1x1) - Placed next to Hobby */
+            .card-reflection {
+                grid-column: 4 / span 1; 
                 grid-row: 2 / span 1;
             }
 
@@ -222,9 +245,9 @@
                     <p>Program: **Food Technology**</p>
                     <p>Year: **Year 1**</p>
                     <div class="social-links">
-                        <a href="#linkedin">LinkedIn</a>
-                        <a href="#github">GitHub</a>
-                        <a href="#portal">UMT Portal</a>
+                        <a href="https://www.linkedin.com" target="_blank">LinkedIn</a>
+                        <a href="https://github.com/S80795" target="_blank">GitHub</a>
+                        <a href="#" target="_blank">UMT Portal</a>
                     </div>
                 </div>
             </div>
@@ -233,7 +256,7 @@
                 <div class="card-title">Campus & Location</div>
                 <div class="card-content">
                     <p class="location-info">UMT, Kuala Nerus, Terengganu</p>
-                    <div class="time-display">00:00</div>
+                    <div class="time-display">15:39</div>
                 </div>
             </div>
 
@@ -255,7 +278,6 @@
                     <h2>Starch Gelatinization in Local Kuih</h2>
                     <p>Analyzing texture profiles of Kuih Lapis: Investigating how starch changes properties (gelatinization) during cooking to optimize chewiness and structure in traditional Malaysian desserts.</p>
                 </div>
-                
             </div>
 
             <div class="bento-card card-hobby">
@@ -265,11 +287,22 @@
                     <p>Relaxing evening walks at **Pantai UMT** to recharge and enjoy the ocean breeze.</p>
                 </div>
             </div>
+            
+            <div class="bento-card card-reflection">
+                <div class="card-title">Why Food Tech Matters in Malaysia</div>
+                <div class="card-content">
+                    <p>Sustainable food security is crucial for our future. By optimizing local processing methods, we can reduce waste and improve nutrition.</p>
+                </div>
+            </div>
 
             <div class="bento-card card-playlist">
                 <div class="card-title">Study Playlist</div>
                 <div class="music-player-placeholder">
-                    [ Placeholder: Embed Spotify/YouTube Music Player ]
+                    [ <iframe style="border-radius:12px"
+src="https://open.spotify.com/embed/playlist/0vvXsWCC9xrXsKd4FyS8kM?ut
+m_source=generator&theme=0" width="100%" height="152" frameBorder="0"
+allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media;
+fullscreen; picture-in-picture" loading="lazy"></iframe> ]
                 </div>
             </div>
 
@@ -281,7 +314,6 @@
             const timeElement = document.querySelector('.time-display');
             if (timeElement) {
                 const now = new Date();
-                // Set timezone to Malaysia (GMT+8)
                 const options = {
                     timeZone: 'Asia/Kuala_Lumpur',
                     hour: '2-digit',
